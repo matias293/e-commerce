@@ -1,4 +1,5 @@
 import knex from 'knex';
+import {ProductC} from '../carrito.interfaces'
 
 export const mySQLDB = knex({
     client: 'mysql',
@@ -35,7 +36,7 @@ export const mySQLDB = knex({
   });
 
 export class CarritoMysqlDAO{
-    async get(id?: string): Promise<IItem | IItem[]> {
+    async get(id?: string): Promise<ProductC | ProductC[]> {
     
           if (id) {
             const producto = await mySQLDB('carritos').where(
@@ -47,7 +48,7 @@ export class CarritoMysqlDAO{
           return mySQLDB('carritos');
     }
 
-    async add(id: string): Promise<IItem> {
+    async add(id: string): Promise<ProductC> {
       
           const producto = await this.get(id);
           
@@ -57,7 +58,7 @@ export class CarritoMysqlDAO{
               'El producto que quiere ingresar ya se encuentra'
             );
           } else {
-            console.log('entre',3)
+            
             const product = await mySQLDB('productos').where(
               'id',
               Number(id)
@@ -66,7 +67,7 @@ export class CarritoMysqlDAO{
               const productAgregado = await mySQLDB('carritos').insert(
                 product[0]
               );
-              const nuevoProducto:IItem | unknown  = await this.get(
+              const nuevoProducto:ProductC | unknown  = await this.get(
                 productAgregado[0] as unknown as string
               );
               return nuevoProducto
@@ -77,7 +78,7 @@ export class CarritoMysqlDAO{
         
       }
 
-      async delete(id: string): Promise<IItem[]> {
+      async delete(id: string): Promise<ProductC[]> {
         
           const productDeleted = await mySQLDB('carritos')
             .where('id', Number(id))
@@ -88,7 +89,7 @@ export class CarritoMysqlDAO{
             );
           } else {
             const productsInCart = await this.get();
-            return productsInCart as IItem[];
+            return productsInCart as ProductC[];
           }
        
       }

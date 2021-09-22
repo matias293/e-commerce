@@ -5,6 +5,18 @@ export interface CarritoI {
 
 }
 
+export interface ProductC {
+    
+    nombre: string;
+    precio: number;
+    descripcion:string;
+    codigo:string;
+    foto:string;
+    stock:number;
+   
+  
+}
+
  export interface ProductI {
     _id: string;
     nombre: string;

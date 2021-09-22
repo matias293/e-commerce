@@ -92,7 +92,7 @@ export class CarritoFSDAO  {
      }
     }
   
-    writeFile = (carro) => {
+    writeFile = (carro:CarritoI[]) => {
       try {
       
         return fs.writeFileSync(this.fileName,carro,null,'\t')

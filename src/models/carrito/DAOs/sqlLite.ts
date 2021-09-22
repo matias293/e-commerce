@@ -43,7 +43,7 @@ export class CarritoSqliteDAO{
           return sqliteDB('carritos');
     }
 
-    async add(id: string): Promise<IItem> {
+    async add(id: string): Promise<ProductI> {
       
           const producto = await this.get(id);
           
@@ -53,7 +53,7 @@ export class CarritoSqliteDAO{
               'El producto que quiere ingresar ya se encuentra'
             );
           } else {
-            console.log('entre',3)
+           
             const product = await sqliteDB('productos').where(
               'id',
               Number(id)

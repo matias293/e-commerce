@@ -62,7 +62,7 @@ export class ProductosSqliteDAO implements ProductBaseClass {
         return productNew
       }
 
-      async update(id: string, newProductData: newProductI): Promise<ProductI> {
+      async update(id: string, newProductData: newProductI) {
          await sqliteDB.from('productos').where({ id }).update(newProductData);
          const producto = await this.get(id)
          const productoActualizado = producto

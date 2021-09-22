@@ -56,7 +56,6 @@ class CarritoSqliteDAO {
                 throw new Error('El producto que quiere ingresar ya se encuentra');
             }
             else {
-                console.log('entre', 3);
                 const product = yield exports.sqliteDB('productos').where('id', Number(id));
                 if (product.length) {
                     const productAgregado = yield exports.sqliteDB('carritos').insert(product[0]);
