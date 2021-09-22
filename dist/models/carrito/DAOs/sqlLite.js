@@ -18,12 +18,12 @@ exports.sqliteDB = knex_1.default({
     client: 'sqlite3',
     connection: { filename: './shop.sqlite' }
 });
-exports.sqliteDB.schema.hasTable('carrito').then((exists) => {
+exports.sqliteDB.schema.hasTable('carritos').then((exists) => {
     if (!exists) {
-        console.log('NO EXISTE LA TABLA MENSAJE. VAMOS A CREARLA');
+        console.log('NO EXISTE LA TABLA CARRITO. VAMOS A CREARLA');
         exports.sqliteDB.schema
-            .createTable('productos', (carritosTable) => {
-            carritosTable.increments('_id');
+            .createTable('carritos', (carritosTable) => {
+            carritosTable.increments();
             carritosTable.string('nombre').notNullable();
             carritosTable.string('descripcion').notNullable();
             carritosTable.string('codigo').notNullable();
@@ -43,10 +43,44 @@ class CarritoSqliteDAO {
     get(id) {
         return __awaiter(this, void 0, void 0, function* () {
             if (id) {
-                const producto = yield exports.sqliteDB('carrito').where('id', Number(id));
+                const producto = yield exports.sqliteDB('carritos').where('id', Number(id));
                 return producto[0];
             }
-            return exports.sqliteDB('carrito');
+            return exports.sqliteDB('carritos');
+        });
+    }
+    add(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const producto = yield this.get(id);
+            if (producto) {
+                throw new Error('El producto que quiere ingresar ya se encuentra');
+            }
+            else {
+                console.log('entre', 3);
+                const product = yield exports.sqliteDB('productos').where('id', Number(id));
+                if (product.length) {
+                    const productAgregado = yield exports.sqliteDB('carritos').insert(product[0]);
+                    const nuevoProducto = yield this.get(productAgregado[0]);
+                    return nuevoProducto;
+                }
+                else {
+                    throw new Error('El producto no existe');
+                }
+            }
+        });
+    }
+    delete(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const productDeleted = yield exports.sqliteDB('carritos')
+                .where('id', Number(id))
+                .del();
+            if (!productDeleted) {
+                throw new Error('El producto que quiere eliminar no se encuentra en su carrito');
+            }
+            else {
+                const productsInCart = yield this.get();
+                return productsInCart;
+            }
         });
     }
 }

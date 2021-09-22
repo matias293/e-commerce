@@ -1,9 +1,21 @@
+import knex from 'knex';
 import {
     newProductI,
     ProductI,
     ProductBaseClass,
     ProductQuery,
   } from '../../products.interface';
+
+  export const mySQLDB = knex({
+    client: 'mysql',
+    connection: {
+      host: '127.0.0.1',
+      user: 'root',
+      password: '',
+      database: 'ecommerce',
+    },
+    pool: { min: 0, max: 7 },
+  });
 
 export class ProductosMysqlDAO implements ProductBaseClass {
     
