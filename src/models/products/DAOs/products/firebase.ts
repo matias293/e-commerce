@@ -18,7 +18,7 @@ export class ProductosFirebaseDAO{
           this.prodFirebase = this.db.collection('productos');
     }
 
-    async get(id?: string): Promise<Products[]> {
+    async get(id?: string): Promise<ProductI[]> {
         let prod= []
         if(id){
             const dato = await this.prodFirebase.doc(id).get();
@@ -46,7 +46,7 @@ export class ProductosFirebaseDAO{
 		return await doc.create(body);
     }
 
-    async update(id: string, body: newProductI): Promise<Products[]> {
+    async update(id: string, body: newProductI): Promise<ProductI[]> {
         const producto = await this.get(id);
         if(producto){
             await this.prodFirebase.doc(id).update(body);
