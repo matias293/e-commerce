@@ -2,6 +2,9 @@ import moment from 'moment'
 import admin from 'firebase-admin'
 
 import {productsAPI} from '../../../apis/productos'
+import {CarritoI,
+    ProductC,
+    ProductI} from '../carrito.interfaces'
 import serviceAccount  from '../../../../coderFirebase.json'
 
 export class CarritoFirebaseDAO{
@@ -17,7 +20,7 @@ export class CarritoFirebaseDAO{
           this.prodFirebase = this.db.collection('carrito');
     }
     async get(id?: string) {
-        let prod = []
+        let prod:ProductC[] = []
      if(id){
          const prodDAta = await this.carritoFirebase.doc(id).get()
          const product = prodDAta.data()

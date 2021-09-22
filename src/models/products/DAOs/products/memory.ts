@@ -76,10 +76,10 @@ export class ProductosMemDAO implements ProductBaseClass {
       query.push((aProduct: ProductI) => aProduct.codigo == options.codigo);
     
     if (options.minPrecio)
-      query.push((aProduct: ProductI) => aProduct.precio >= (options.minPrecio as number));  
+      query.push((aProduct: ProductI) => (aProduct.precio as number) >= (options.minPrecio as number));  
     
     if (options.maxPrecio)
-      query.push((aProduct: ProductI) => aProduct.precio <= (options.maxPrecio as number));  
+      query.push((aProduct: ProductI) => (aProduct.precio as number) <= (options.maxPrecio as number));  
     
     if (options.minStock)
       query.push((aProduct: ProductI) => aProduct.stock == (options.minStock as number));  

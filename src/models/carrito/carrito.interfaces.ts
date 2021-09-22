@@ -7,13 +7,15 @@ export interface CarritoI {
 
 export interface ProductC {
     
-    nombre: string;
-    precio: number;
-    descripcion:string;
-    codigo:string;
-    foto:string;
-    stock:number;
-   
+    _id?: string;
+    id?:string
+    nombre?: string;
+    precio?: number;
+    descripcion?:string;
+    codigo?:string;
+    foto?:string;
+    stock?:number;
+    timestamp?:number
   
 }
 

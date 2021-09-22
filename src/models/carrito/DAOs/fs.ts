@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import fs from 'fs'
 import {ProductosMemDAO} from '../../../models/products/DAOs/products/memory'
-import {CarritoI,ProductI} from '../carrito.interfaces'
+import {CarritoI,ProductC,ProductI} from '../carrito.interfaces'
 import {productsAPI} from '../../../apis/productos'
 
 
@@ -64,14 +64,14 @@ export class CarritoFSDAO  {
     add = async(id:string): Promise<ProductI> => {  
       const Producto =  productsAPI
       const productos = await  Producto.getProducts()
-      const producto = productos.find(prod=> prod._id == id )
+      const producto  = productos.find(prod=> prod._id == id )
       if(!producto){
         throw new Error('El producto no existe')
       }
      else{
        this.productos.push(producto)
        this.guardar()
-       return producto
+       return producto as ProductI
      }
     }
     

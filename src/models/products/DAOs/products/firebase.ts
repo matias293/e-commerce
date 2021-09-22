@@ -1,6 +1,11 @@
-import moment from 'moment'
+
 import admin from 'firebase-admin'
 
+import {
+    newProductI,
+    ProductI,
+    ProductQuery,
+} from '../../products.interface'
 import serviceAccount  from '../../../../../coderFirebase.json'
 
 
@@ -19,19 +24,19 @@ export class ProductosFirebaseDAO{
     }
 
     async get(id?: string): Promise<ProductI[]> {
-        let prod= []
+        let prod : ProductI[]= []
         if(id){
             const dato = await this.prodFirebase.doc(id).get();
             const producto = dato.data();
             if(producto){
                prod.push({_id:dato.id,...producto})
-              return  prod
+              return  prod 
             }
-            return prod
+            return prod 
         } else {
             const datos = await this.prodFirebase.get()
             const productos = datos.docs;
-            prod = productos.map((producto) => ({
+            prod   = productos.map((producto) => ({
                 _id: producto.id,
                 ...producto.data()
             }))
@@ -40,8 +45,8 @@ export class ProductosFirebaseDAO{
         }
     }
 
-    async add(body: newProductI): Promise<FirebaseFirestore.WriteResult> {
-       body.timestamp = moment().format('DD/MM/YYYY HH:mm:ss');
+    async add(body: ProductI): Promise<FirebaseFirestore.WriteResult> {
+       body.timestamp = Date.now();
        const doc = this.prodFirebase.doc();
 		return await doc.create(body);
     }
@@ -69,36 +74,37 @@ export class ProductosFirebaseDAO{
         }
     }
 
-    async query(options: ProductQuery): Promise<Products[]> {
+    async query(options: ProductQuery): Promise<void> {
         const productos = await this.prodFirebase.get();
 		const docs = productos.docs;
-		const output = docs.map((document) => ({
+		const output:ProductI[] = docs.map((document) => ({
 			_id: document.id,
 			...document.data(),
 		}));
-        type Conditions = (Product: Products) => boolean;
+        type Conditions = (Product: ProductI) => boolean;
 
         const query: Conditions[] = [];
-
+      
 		if (options.nombre)
-			query.push((product: Products) => product.title == options.title);
+			query.push((product: ProductI) => product.nombre == options.nombre);
 
 		
 		if (options.codigo)
-			query.push((product: Products) => product.codigo == options.codigo);
-
+			query.push((product: ProductI) => product.codigo == options.codigo);
+        
 		if (options.minPrecio)
-			query.push((product: Products) => product.precio >= options.minPrecio);
-
+			query.push((product: ProductI) => (product.precio as number) >= (options.minPrecio as number));
+        
 		if (options.maxPrecio)
-			query.push((product: Products) => product.price <= options.maxPrecio);
-
+			query.push((product: ProductI) => (product.precio as number) <= (options.maxPrecio as number));
+        
 		if (options.minStock)
-			query.push((product: Products) => product.stock >= options.minStock);
-
+			query.push((product: ProductI) => (product.stock as number) >= (options.minStock as number));
+        
 		if (options.maxStock)
-			query.push((product: Products) => product.stock <= options.maxStock);
+			query.push((product: ProductI) => (product.stock as number) <= (options.maxStock as number));
 
-		return output.filter((prod) => query.every((x) => x(prod)));
+		 output.filter((prod) => query.every((x) => x(prod)));
+         return
     }
 }

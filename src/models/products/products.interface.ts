@@ -10,14 +10,15 @@ export interface newProductI {
 }
 
 export interface ProductI {
-    _id: string;
-    nombre: string;
-    precio: number;
-    descripcion:string;
-    codigo:string;
-    foto:string;
-    stock:number;
-    timestamp:number
+    _id?: string;
+    id?:string
+    nombre?: string;
+    precio?: number;
+    descripcion?:string;
+    codigo?:string;
+    foto?:string;
+    stock?:number;
+    timestamp?:number
   
 }
 
