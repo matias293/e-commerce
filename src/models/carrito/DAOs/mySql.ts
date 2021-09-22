@@ -34,7 +34,7 @@ export const mySQLDB = knex({
     }
   });
 
-export class CarritoSqliteDAO{
+export class CarritoMysqlDAO{
     async get(id?: string): Promise<IItem | IItem[]> {
     
           if (id) {

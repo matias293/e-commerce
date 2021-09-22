@@ -24,7 +24,6 @@ class ProductosMemDAO {
     }
     get(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log('entre', this.productos);
             if (id) {
                 return this.productos.filter((aProduct) => aProduct._id === id);
             }

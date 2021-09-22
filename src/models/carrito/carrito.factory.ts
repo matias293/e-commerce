@@ -1,5 +1,5 @@
 import {CarritoMemDAO} from './DAOs/memory'
-import {CarritoFirebaseDAO} from './DAOs/firebase'
+// import {CarritoFirebaseDAO} from './DAOs/firebase'
 import {CarritoFSDAO} from './DAOs/fs'
 import {CarritoCompassDAO} from './DAOs/mongo'
 import {CarritoMysqlDAO} from './DAOs/mySql'
@@ -38,9 +38,9 @@ export class NoticiasFactoryDAO {
             console.log('RETORNANDO INSTANCIA CLASE SQLITE3');
             return new CarritoSqliteDAO();
 
-            case TipoPersistencia.Firebase:
-              console.log('RETORNANDO INSTANCIA CLASE FIREBASE');
-              return new CarritoFirebaseDAO();
+            // case TipoPersistencia.Firebase:
+            //   console.log('RETORNANDO INSTANCIA CLASE FIREBASE');
+            //   return new CarritoFirebaseDAO();
 
       case TipoPersistencia.LocalMongo:
         console.log('RETORNANDO INSTANCIA CLASE MONGO LOCAL');

@@ -7,7 +7,7 @@ exports.NoticiasFactoryDAO = exports.TipoPersistencia = void 0;
 const memory_1 = require("./DAOs/products/memory");
 const fs_1 = require("./DAOs/products/fs");
 const mongo_1 = require("./DAOs/products/mongo");
-const firebase_1 = require("./DAOs/products/firebase");
+// import {ProductosFirebaseDAO} from './DAOs/products/firebase'
 const mySql_1 = require("./DAOs/products/mySql");
 const sqlLite_1 = require("./DAOs/products/sqlLite");
 const path_1 = __importDefault(require("path"));
@@ -37,9 +37,9 @@ class NoticiasFactoryDAO {
             case TipoPersistencia.SQLITE3:
                 console.log('RETORNANDO INSTANCIA CLASE SQLITE3');
                 return new sqlLite_1.ProductosSqliteDAO();
-            case TipoPersistencia.Firebase:
-                console.log('RETORNANDO INSTANCIA CLASE FIREBASE');
-                return new firebase_1.ProductosFirebaseDAO();
+            // case TipoPersistencia.Firebase:
+            //   console.log('RETORNANDO INSTANCIA CLASE FIREBASE');
+            //   return new ProductosFirebaseDAO();
             case TipoPersistencia.LocalMongo:
                 console.log('RETORNANDO INSTANCIA CLASE MONGO LOCAL');
                 return new mongo_1.ProductosCompassDAO(true);

@@ -5,7 +5,7 @@ import {CarritoI, ProductI} from '../models/carrito/carrito.interfaces'
 /**
  * Con esta variable elegimos el tipo de persistencia
  */
-const tipo = TipoPersistencia.SQLITE3;
+const tipo = TipoPersistencia.Memoria;
 
 class carAPI {
   private carritos;

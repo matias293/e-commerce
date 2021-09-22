@@ -1,7 +1,7 @@
 import { ProductosMemDAO } from './DAOs/products/memory';
 import { ProductosFSDAO } from './DAOs/products/fs';
 import { ProductosCompassDAO } from './DAOs/products/mongo';
-import {ProductosFirebaseDAO} from './DAOs/products/firebase'
+// import {ProductosFirebaseDAO} from './DAOs/products/firebase'
 import {ProductosMysqlDAO} from './DAOs/products/mySql'
 import {ProductosSqliteDAO} from './DAOs/products/sqlLite'
 
@@ -38,9 +38,9 @@ export class NoticiasFactoryDAO {
             console.log('RETORNANDO INSTANCIA CLASE SQLITE3');
             return new ProductosSqliteDAO();
 
-            case TipoPersistencia.Firebase:
-              console.log('RETORNANDO INSTANCIA CLASE FIREBASE');
-              return new ProductosFirebaseDAO();
+            // case TipoPersistencia.Firebase:
+            //   console.log('RETORNANDO INSTANCIA CLASE FIREBASE');
+            //   return new ProductosFirebaseDAO();
 
       case TipoPersistencia.LocalMongo:
         console.log('RETORNANDO INSTANCIA CLASE MONGO LOCAL');

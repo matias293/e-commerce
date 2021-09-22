@@ -14,7 +14,7 @@ const products_factory_1 = require("../models/products/products.factory");
 /**
  * Con esta variable elegimos el tipo de persistencia
  */
-const tipo = products_factory_1.TipoPersistencia.SQLITE3;
+const tipo = products_factory_1.TipoPersistencia.Memoria;
 class prodAPI {
     constructor() {
         this.productos = products_factory_1.NoticiasFactoryDAO.get(tipo);

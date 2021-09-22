@@ -1,9 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import {ProductosMemDAO} from '../../../models/products/DAOs/products/memory'
-import {CarritoI,ProductI,CarritoBaseClass} from '../carrito.interfaces'
+import {CarritoI,ProductI} from '../carrito.interfaces'
+import {productsAPI} from '../../../apis/productos'
 
-export class CarritoMemDAO implements CarritoBaseClass {
+export class CarritoMemDAO {
   private carrito: CarritoI[] = [];
   private productos:ProductI[]=[]
 
@@ -35,12 +36,12 @@ export class CarritoMemDAO implements CarritoBaseClass {
   }
 
   async add(id:string): Promise<ProductI> {
-    const productos = new ProductosMemDAO()
+    
 
-    const allProducts:ProductI[] = await productos.get(id)
-    console.log(allProducts,'all')
+    const allProducts:ProductI[] = await productsAPI.getProducts()
+    
     const producto =  allProducts.find((prod: ProductI)=> prod._id == id)
-   console.log(producto,'prod')
+  
     if(!producto){
         throw new Error('El producto no existe')
     }

@@ -5,7 +5,7 @@ import { NoticiasFactoryDAO, TipoPersistencia  } from '../models/products/produc
 /**
  * Con esta variable elegimos el tipo de persistencia
  */
-const tipo = TipoPersistencia.SQLITE3;
+const tipo = TipoPersistencia.Memoria;
 
 class prodAPI {
   private productos;

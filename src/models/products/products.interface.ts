@@ -24,6 +24,8 @@ export interface ProductI {
 export interface ProductQuery {
   nombre?: string;
   codigo?: string;
+  precio?:number;
+  stock?:number;
   minPrecio?:number;
   maxPrecio?:number;
   minStock?:number

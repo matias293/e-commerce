@@ -14,7 +14,7 @@ const carrito_factory_1 = require("../models/carrito/carrito.factory");
 /**
  * Con esta variable elegimos el tipo de persistencia
  */
-const tipo = carrito_factory_1.TipoPersistencia.SQLITE3;
+const tipo = carrito_factory_1.TipoPersistencia.Memoria;
 class carAPI {
     constructor() {
         this.carritos = carrito_factory_1.NoticiasFactoryDAO.get(tipo);

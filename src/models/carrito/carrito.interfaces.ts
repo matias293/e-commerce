@@ -1,7 +1,7 @@
 export interface CarritoI {
     id:string;
     timestamp:number
-    cart:ProductI[]
+    products:ProductI[]
 
 }
 
@@ -28,9 +28,3 @@ export interface newProductI {
     
   }
 
-export interface CarritoBaseClass {
-    get(id?: string | undefined);
-    add(id: string);
-    delete(id: string): ;
-   
-  }

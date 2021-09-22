@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CarritoMemDAO = void 0;
 const uuid_1 = require("uuid");
-const memory_1 = require("../../../models/products/DAOs/products/memory");
+const productos_1 = require("../../../apis/productos");
 class CarritoMemDAO {
     constructor() {
         this.carrito = [];
@@ -40,11 +40,8 @@ class CarritoMemDAO {
     }
     add(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const productos = new memory_1.ProductosMemDAO();
-            const allProducts = yield productos.get(id);
-            console.log(allProducts, 'all');
+            const allProducts = yield productos_1.productsAPI.getProducts();
             const producto = allProducts.find((prod) => prod._id == id);
-            console.log(producto, 'prod');
             if (!producto) {
                 throw new Error('El producto no existe');
             }

@@ -22,7 +22,6 @@ export class ProductosMemDAO implements ProductBaseClass {
   }
 
   async get(id?: string): Promise<ProductI[]> {
-    console.log('entre',this.productos)
     if (id) {
       return this.productos.filter((aProduct) => aProduct._id === id);
     }

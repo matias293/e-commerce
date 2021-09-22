@@ -16,11 +16,9 @@ const carritoSchema = new mongoose.Schema({
             productId: {
               type: Schema.Types.ObjectId,
               ref: 'Product',
-              
             }
           }
         ]
-      
   })
 
   carritoSchema.methods.toJSON = function() {
@@ -74,8 +72,8 @@ const carritoSchema = new mongoose.Schema({
        return carro.products
       }
       else{
-      const carros =  await this.carrito.find()
-      return carros
+        const carros =  await this.carrito.find()
+          return carros
       } 
     }
 

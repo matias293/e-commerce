@@ -1,19 +1,18 @@
 import { v4 as uuidv4 } from 'uuid';
 
-
-
+import fs from 'fs'
 import {ProductosMemDAO} from '../../../models/products/DAOs/products/memory'
- import {CarritoI,ProductI,CarritoBaseClass} from '../carrito.interfaces'
+import {CarritoI,ProductI} from '../carrito.interfaces'
+import {productsAPI} from '../../../apis/productos'
 
 
 
-
-export class CarritoFSDAO implements CarritoBaseClass {
+export class CarritoFSDAO  {
 
     public carrito:    CarritoI[] = []
     public carritoOld: CarritoI[] = []
-    public productos:  ProductI[]= []
-    public fileName:string
+    public productos:  ProductI[] = []
+    public fileName:   string
    
   
     constructor(filePath:string){
@@ -51,7 +50,7 @@ export class CarritoFSDAO implements CarritoBaseClass {
       }
     }
   
-    delete = (id:string):Promise<void> =>{
+    delete = (id:string) =>{
       const productos = this.productos
        
       const productosNuevos:Array<ProductI> =  productos.filter(prod => prod._id !== id)
@@ -63,8 +62,8 @@ export class CarritoFSDAO implements CarritoBaseClass {
     }
   
     add = async(id:string): Promise<ProductI> => {  
-      const Producto = new ProductosMemDAO()
-      const productos = await  Producto.get()
+      const Producto =  productsAPI
+      const productos = await  Producto.getProducts()
       const producto = productos.find(prod=> prod._id == id )
       if(!producto){
         throw new Error('El producto no existe')
@@ -77,7 +76,7 @@ export class CarritoFSDAO implements CarritoBaseClass {
     }
     
     getCarritos = (id:string) => {
-        const carros : Array<Carro> = this.leer()
+        const carros  = this.leer()
         const carrito = carros.find(prod => prod.id === id )
         return carrito
     }
@@ -93,7 +92,7 @@ export class CarritoFSDAO implements CarritoBaseClass {
      }
     }
   
-    writeFile = (carro:Array<Carro>) => {
+    writeFile = (carro) => {
       try {
       
         return fs.writeFileSync(this.fileName,carro,null,'\t')

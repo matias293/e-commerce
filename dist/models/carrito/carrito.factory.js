@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NoticiasFactoryDAO = exports.TipoPersistencia = void 0;
 const memory_1 = require("./DAOs/memory");
-const firebase_1 = require("./DAOs/firebase");
+// import {CarritoFirebaseDAO} from './DAOs/firebase'
 const fs_1 = require("./DAOs/fs");
 const mongo_1 = require("./DAOs/mongo");
 const mySql_1 = require("./DAOs/mySql");
@@ -37,9 +37,9 @@ class NoticiasFactoryDAO {
             case TipoPersistencia.SQLITE3:
                 console.log('RETORNANDO INSTANCIA CLASE SQLITE3');
                 return new sqlLite_1.CarritoSqliteDAO();
-            case TipoPersistencia.Firebase:
-                console.log('RETORNANDO INSTANCIA CLASE FIREBASE');
-                return new firebase_1.CarritoFirebaseDAO();
+            // case TipoPersistencia.Firebase:
+            //   console.log('RETORNANDO INSTANCIA CLASE FIREBASE');
+            //   return new CarritoFirebaseDAO();
             case TipoPersistencia.LocalMongo:
                 console.log('RETORNANDO INSTANCIA CLASE MONGO LOCAL');
                 return new mongo_1.CarritoCompassDAO(true);

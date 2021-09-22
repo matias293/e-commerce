@@ -70,11 +70,20 @@ export class ProductosCompassDAO implements ProductBaseClass {
 
   async query(options: ProductQuery): Promise<ProductI[]> {
     let query: ProductQuery = {};
-
     if (options.nombre) query.nombre = options.nombre;
 
-    if (options.precio) query.precio = options.precio;
+    if (options.codigo) query.codigo = options.codigo;
 
-    return this.productos.find(query);
+		if (options.minPrecio && options.maxPrecio)
+			query.precio = { $gte: options.minPrecio, $lte: options.maxPrecio };
+
+		if (options.minStock && options.maxStock)
+			query.stock = { $gte: options.minStock, $lte: options.maxStock };
+
+		
+
+    const productos = await this.productos.find(query);
+
+    return productos 
   }
 }
