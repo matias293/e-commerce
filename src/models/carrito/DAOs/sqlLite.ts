@@ -1,5 +1,6 @@
 import knex from 'knex';
 
+import {ProductI} from '../carrito.interfaces'
 
 export const sqliteDB = knex({
     client: 'sqlite3',
@@ -30,7 +31,7 @@ export const sqliteDB = knex({
   });
 
 export class CarritoSqliteDAO{
-    async get(id?: string): Promise<IItem | IItem[]> {
+    async get(id?: string): Promise< ProductI[]|ProductI > {
     
           if (id) {
             const producto = await sqliteDB('carritos').where(
@@ -61,7 +62,7 @@ export class CarritoSqliteDAO{
               const productAgregado = await sqliteDB('carritos').insert(
                 product[0]
               );
-              const nuevoProducto:IItem | unknown  = await this.get(
+              const nuevoProducto:ProductI | unknown  = await this.get(
                 productAgregado[0] as unknown as string
               );
               return nuevoProducto
@@ -72,7 +73,7 @@ export class CarritoSqliteDAO{
         
       }
 
-      async delete(id: string): Promise<IItem[]> {
+      async delete(id: string): Promise<ProductI[]> {
         
           const productDeleted = await sqliteDB('carritos')
             .where('id', Number(id))
@@ -83,7 +84,7 @@ export class CarritoSqliteDAO{
             );
           } else {
             const productsInCart = await this.get();
-            return productsInCart as IItem[];
+            return productsInCart as ProductI[] ;
           }
        
       }
