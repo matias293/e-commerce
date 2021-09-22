@@ -1,0 +1,22 @@
+[
+	{
+		"_id": "3d408741-0021-473f-8564-a5428eff2f5c",
+		"nombre": "as",
+		"precio": 11,
+		"descripcion": "Azul",
+		"codigo": "lapi",
+		"foto": "lap.com",
+		"stock": 12,
+		"timestamp": 1632228987182
+	},
+	{
+		"_id": "361117b1-0773-470b-8ded-ca15f3093442",
+		"nombre": "as",
+		"precio": 11,
+		"descripcion": "Azul",
+		"codigo": "lapi",
+		"foto": "lap.com",
+		"stock": 12,
+		"timestamp": 1632228994770
+	}
+]
